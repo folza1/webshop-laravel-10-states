@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import Button from "react-bootstrap/Button";
 
 function Basket(props) {
     return (
@@ -8,16 +9,20 @@ function Basket(props) {
     );
 }
 
-export default function States4({children}) {
+export default function States4({ children }) {
     const [myState, setMyState] = useState(0);
+
+    const handleToBasketClick = () => {
+        setMyState(myState + 1);
+    };
 
     return (
         <div className="App">
             <header className="App-header">
-                <Basket myState={myState}/> {/* Show Basket komponent */}
+                <Basket myState={myState} /> {/* Show Basket komponens */}
             </header>
-            {/*<ProductsMy products3={products3} myState={myState} setMyState={setMyState}/>*/}
-            {children}
+            {children(handleToBasketClick)} {/* Átadjuk a children komponenseknek a handleToBasketClick callback-et */}
         </div>
     );
 }
+
