@@ -3,8 +3,14 @@ import TelEmail from "@/Components/TelEmail.jsx";
 import SelectMenu from "@/Components/SelectMenu.jsx";
 import LogoSearchBasket from "@/Components/LogoSearchBasket.jsx";
 import NavbarMy from "@/Components/NavbarMy.jsx";
+import {useState} from "react";
 
 export default function Welcome({auth, children, children2, ch2, ch3}) {
+    const [myState, setMyState] = useState(0);
+
+    const handleToBasketClick = () => {
+        setMyState(myState + 1);
+    };
     return (
         <>
             <Head title="Üdvözlünk"/>
@@ -44,10 +50,10 @@ export default function Welcome({auth, children, children2, ch2, ch3}) {
                 </div>
             </div>
             <hr className="w-full" style={{margin: 0, padding: 0}}/>
-            <LogoSearchBasket auth={auth}/>
+            <LogoSearchBasket auth={auth} myState={myState}/>
             <div>{children2}</div>
             <NavbarMy/>
-            <div>{children}</div>
+            <div>{children(handleToBasketClick)}</div>
             <div>{ch2}</div>
             <div>{ch3}</div>
         </>

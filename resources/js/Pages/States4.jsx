@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import Button from "react-bootstrap/Button";
-
-function Basket(props) {
-    return (
-        <>
-            <h1>In basket: {props.myState} DB</h1>
-        </>
-    );
-}
+import Basket from "@/Pages/Basket.jsx";
 
 export default function States4({ children }) {
     const [myState, setMyState] = useState(0);

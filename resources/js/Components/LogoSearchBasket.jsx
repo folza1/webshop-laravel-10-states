@@ -5,7 +5,10 @@ import Button from "react-bootstrap/Button";
 import NavLink from "@/Components/NavLink.jsx";
 
 
-function LogoSearchBasket({auth}) {
+export default function LogoSearchBasket(props) {
+
+    const { auth } = props;
+
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [showResults, setShowResults] = useState(false);
@@ -192,7 +195,7 @@ function LogoSearchBasket({auth}) {
     return (
         <>
             <div>
-                <p>Session ID: {sessionId}</p>
+                <p>Session ID: {sessionId}//{props.myState}</p>
             </div>
             <br/><br/>
             <p>BASKET ITEM INDEXES</p>
@@ -265,8 +268,8 @@ function LogoSearchBasket({auth}) {
                             />
                         </svg>
                         <span
-                            className="bg-red-500 text-white border-1 border-black rounded-full p-1 flex items-center justify-content-center absolute top-0 right-0 -mt-2 -mr-2 w-6 h-6 z-0">
-            {basketLength}
+                            className="bg-red-500 text-black border-1 border-black rounded-full p-1 flex items-center justify-content-center absolute top-0 right-0 -mt-2 -mr-2 w-6 h-6 z-0">
+            {basketLength}//{props.myState}
           </span>
                     </div>
                     <Button
@@ -343,6 +346,4 @@ function LogoSearchBasket({auth}) {
         </>
     );
 }
-
-export default LogoSearchBasket;
 
