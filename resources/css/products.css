@@ -1,0 +1,21 @@
+.divMagassag {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adatokMagassag {
+    height: 200px;
+}
+
+.descriptionMagassag {
+    height: 200px;
+}
+
+.kosarDimensions{
+    width: 400px;
+    height: 250px;
+    background-color: white;
+    border: 1px solid greenyellow;
+}

@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+/*START Tel and Login*/
+@media (max-width: 938px) {
+    .notflex938 {
+        display: block;
+    }
+}
+
+@media (max-width: 427px) {
+    .notflex427 {
+        display: block;
+    }
+}
+
+.selectStyle {
+    max-width: 100px;
+    height: 28px;
+}
+/*END Tel and Login*/
+
+@media (max-width: 925px) {
+    .egymasAlaKereses {
+        flex-direction: column;
+    }
+    .divToCenter {
+        display: flex;
+        justify-content: center;
+    }
+
+    .searchMargin {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.searchButton {
+    height: 38px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.cartButton {
+    min-height: 50px;
+    height: auto;
+    width: auto;
+    padding: 10px;
+}
+
+.inputMagassag {
+    height: 40px;
+    width: 300px;
+}
+
+@media (max-width: 440px) {
+    .searchBarWidth {
+        width: 170px;
+    }
+}
+
+.searchResults {
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    width: 400px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.margin-2{
+    margin:5px;
+}
+
+.noResults {
+    border: none;
+}
+
+
+.kereses {
+    font-size: 20px;
+    height: 40px;
+    color: white;
+}
+
+.kosar {
+    height: 38px !important;
+    font-size: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.imageHeight {
+    height: 330px;
+}
+
+@media (max-width: 490px) {
+    .imageHeight {
+        height: 200px;
+    }
+}
+
+/*Navbar START*/
+.hoverBlue:hover{
+    color: rgb(59 130 246) !important;
+}
+.borderBlue{
+    border-bottom: 3px rgb(59 130 246) solid;
+}
+/*Navbar END*/
+
+
+.fontSizeBig {
+    font-size: 42px;
+}
+
+.colorRed {
+    color: red;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.bannerButton {
+    font-weight: bolder !important;
+    border: 1px solid black !important;
+}
+
+@media (max-width: 500px) {
+    .fontSizeBig {
+        font-size: 22px;
+    }
+
+    .bannerDiv {
+        width: 50px;
+        height: 50px;
+    }
+
+    .colorRed {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 620px) {
+    .fontSizeSlogen {
+        display: none;
+    }
+}
+
+.fontSizeSlogen {
+    font-size: 34px;
+}
+
+@media (max-width: 1410px) {
+    .fontSizeSlogen {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 877px) {
+    .fontSizeSlogen {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1234px) {
+    .displayNone {
+        display: none;
+    }
+
+    .displayTwo {
+        display: flex;
+    }
+}
+
+@media (max-width: 767px) {
+    .padding767 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 470px) {
+    .displayOne {
+        display: flex;
+    }
+
+    .paddingBig {
+        padding: 0 25px 0 25px;
+    }
+}
+
+@media (max-width: 470px) {
+    .displayNone {
+        display: none;
+    }
+}
+
+.divMagassag {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adatokMagassag {
+    height: 200px;
+}
+
+.descriptionMagassag {
+    height: 200px;
+}
+
+.maxSzoveg {
+    max-width: max-content;
+}
+
+.imageHeightSzallitas {
+    height: 100%;
+}
