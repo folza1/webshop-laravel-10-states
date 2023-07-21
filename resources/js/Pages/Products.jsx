@@ -106,7 +106,10 @@ export default function Products({auth, products}) {
                                         className="relative bottom-0 bg-orange-400 hover:bg-green-500 text-white p-1"
                                         onClick={() => {
                                             handleClick(item);
-                                            handleToBasketClick();
+                                            if (item.stock > 0) {
+                                                handleToBasketClick();
+                                                item.stock = item.stock - 1;
+                                            }
                                         }}
                                     >
                                         Kosárba
