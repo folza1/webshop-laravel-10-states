@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import Basket from "@/Pages/Basket.jsx";
+
+function Basket(props) {
+    return (
+        <>
+            <h1>In basket: {props.myState} DB</h1>
+        </>
+    );
+}
 
 export default function States4({ children }) {
     const [myState, setMyState] = useState(0);
