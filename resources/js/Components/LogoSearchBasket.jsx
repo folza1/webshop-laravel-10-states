@@ -7,7 +7,7 @@ import NavLink from "@/Components/NavLink.jsx";
 
 export default function LogoSearchBasket(props) {
 
-    const { auth } = props;
+    const {auth} = props;
 
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -192,10 +192,22 @@ export default function LogoSearchBasket(props) {
             });
     }, []);
 
+    const countItems = (id) => {
+        let count = 0;
+        for (let i = 0; i < props.product.length; i++) {
+            if (props.product[i].id === id) {
+                count++;
+            }
+        }
+        return count;
+    };
+
+    const seenIds = {};
+
     return (
         <>
             <div>
-                <p>Session ID: {sessionId}//{props.myState}</p>
+                <p>Session ID: {sessionId}</p>
             </div>
             <br/><br/>
             <p>BASKET ITEM INDEXES</p>
@@ -205,6 +217,30 @@ export default function LogoSearchBasket(props) {
                         <p>{item.item_index}</p>
                     </div>
                 ))}
+            </div>
+            <div>
+                <h1>In basket: {props.basketCount} DB</h1>
+                {props.product && (
+                    <div>
+                        <h1>In basket:</h1>
+                        {props.product.map((item, index) => {
+                            if (!seenIds[item.id]) {
+                                seenIds[item.id] = true;
+                                return (
+                                    <div key={index} className="flex">
+                                        <img className="w-10 h-10 mr-2" src={item.thumbnail} alt={item.title}/>
+                                        <p>
+                                            {item.title} (Count: {countItems(item.id)})
+                                        </p>
+                                        <p>{item.stock}</p>
+                                        <button onClick={() => props.onDeleteItem(item.id)}>Delete</button>
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })}
+                    </div>
+                )}
             </div>
             <div
                 className="flex w-full md:w-4/5 lg:w-5/6 mx-auto items-center justify-between egymasAlaKereses divToCenter">
@@ -269,7 +305,7 @@ export default function LogoSearchBasket(props) {
                         </svg>
                         <span
                             className="bg-red-500 text-black border-1 border-black rounded-full p-1 flex items-center justify-content-center absolute top-0 right-0 -mt-2 -mr-2 w-6 h-6 z-0">
-            {basketLength}//{props.myState}
+            {basketLength}
           </span>
                     </div>
                     <Button

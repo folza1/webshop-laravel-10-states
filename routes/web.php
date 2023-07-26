@@ -128,5 +128,9 @@ Route::get('/states4', function () {
     ]);
 });
 
+Route::get('/localstorage', function () {
+    return Inertia::render('LocalStorage');
+});
+
 
 require __DIR__ . '/auth.php';

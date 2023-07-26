@@ -59,6 +59,21 @@ export default function Products({auth, products}) {
         fetchBasketLength();
     }, []);
 
+    //Add item to Basket START
+    const [basket, setBasket] = useState(() => {
+        const storedBasket = localStorage.getItem('basket');
+        return storedBasket ? JSON.parse(storedBasket) : [];
+    });
+
+    const handleAddToBasket = (item) => {
+        setBasket((prevBasket) => [...prevBasket, item]);
+    };
+
+    useEffect(() => {
+        localStorage.setItem('basket', JSON.stringify(basket));
+    }, [basket]);
+    //Add item to Basket END
+
     return (
         <Welcome auth={auth} children2={<><h1></h1></>}>
             {handleToBasketClick => (
@@ -107,7 +122,8 @@ export default function Products({auth, products}) {
                                         onClick={() => {
                                             handleClick(item);
                                             if (item.stock > 0) {
-                                                handleToBasketClick();
+                                                handleAddToBasket(item);
+                                                handleToBasketClick(item);
                                                 item.stock = item.stock - 1;
                                             }
                                         }}

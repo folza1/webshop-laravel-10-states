@@ -3,13 +3,50 @@ import TelEmail from "@/Components/TelEmail.jsx";
 import SelectMenu from "@/Components/SelectMenu.jsx";
 import LogoSearchBasket from "@/Components/LogoSearchBasket.jsx";
 import NavbarMy from "@/Components/NavbarMy.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+
+const generateRandomString = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+    return result;
+};
+
 
 export default function Welcome({auth, children, children2, ch2, ch3}) {
-    const [myState, setMyState] = useState(0);
 
-    const handleToBasketClick = () => {
-        setMyState(myState + 1);
+    //Create sessionID START
+    const sessionIDLength = 16;
+    const [sessionID, setSessionID] = useState(() => {
+        const storedSessionID = localStorage.getItem('sessionID');
+        return storedSessionID ? storedSessionID : generateRandomString(sessionIDLength);
+    });
+
+    useEffect(() => {
+        if (!localStorage.getItem('sessionID')) {
+            localStorage.setItem('sessionID', sessionID);
+        } else {
+            setSessionID(generateRandomString(sessionIDLength));
+        }
+    }, []);
+    //Create sessionID END
+
+    //Add Basket content START
+    const [basketCount, setBasketCount] = useState(0);
+    const [product, setProduct] = useState([]);
+
+    const handleToBasketClick = (item) => {
+        setProduct((prevProducts) => [...prevProducts, item]);
+        setBasketCount((prevBasketCount) => prevBasketCount + 1);
+        console.log(product);
+    };
+    //Add Basket content START
+
+    const handleDeleteItem = (itemId) => {
+        setProduct((prevProducts) => prevProducts.filter((item) => item.id !== itemId));
     };
     return (
         <>
@@ -50,10 +87,10 @@ export default function Welcome({auth, children, children2, ch2, ch3}) {
                 </div>
             </div>
             <hr className="w-full" style={{margin: 0, padding: 0}}/>
-            <LogoSearchBasket auth={auth} myState={myState}/>
+            <LogoSearchBasket auth={auth} basketCount={basketCount} product={product} onDeleteItem={handleDeleteItem}/>
             <div>{children2}</div>
             <NavbarMy/>
-            <div>{children(handleToBasketClick)}</div>
+            <div>{typeof children === 'function' ? children(handleToBasketClick) : children}</div>
             <div>{ch2}</div>
             <div>{ch3}</div>
         </>

@@ -14,7 +14,7 @@ export default function ProductsMy({ products3 }) {
                                 className="p-1 m-1"
                                 onClick={() => {
                                     if (product.stock > 0) {
-                                        handleToBasketClick();
+                                        handleToBasketClick(product);
                                         product.stock = product.stock - 1;
                                     }
                                 }}
