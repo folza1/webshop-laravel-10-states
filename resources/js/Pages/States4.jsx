@@ -1,38 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Basket(props) {
-    const countItems = (id) => {
-        let count = 0;
-        for (let i = 0; i < props.product.length; i++) {
-            if (props.product[i].id === id) {
-                count++;
-            }
-        }
-        return count;
-    };
-
-    const seenIds = {};
-
     return (
         <>
-            <h1>In basket: {props.basketCount} DB</h1>
-            {props.product && (
+            <h1>In basket: {props.myState} DB</h1>
+            {props.basketItems && (
                 <div>
                     <h1>In basket:</h1>
-                    {props.product.map((item, index) => {
-                        if (!seenIds[item.id]) {
-                            seenIds[item.id] = true;
-                            return (
-                                <div key={index}>
-                                    <p>
-                                        {item.title} (Count: {countItems(item.id)})
-                                    </p>
-                                    <p>{item.stock}</p>
-                                </div>
-                            );
-                        }
-                        return null;
-                    })}
+                    {props.basketItems.map((item, index) => (
+                        <div key={index}>
+                            <p>{item.title}</p>
+                            <p>{item.stock-1}</p>
+                        </div>
+                    ))}
                 </div>
             )}
         </>
@@ -40,19 +20,27 @@ function Basket(props) {
 }
 
 export default function States4({ children }) {
-    const [basketCount, setBasketCount] = useState(0);
-    const [product, setProduct] = useState([]);
+    const [myState, setMyState] = useState(0);
+    const [basketItems, setBasketItems] = useState(() => {
+        const storedItems = localStorage.getItem('basketItems');
+        return storedItems ? JSON.parse(storedItems) : [];
+    });
 
-    const handleToBasketClick = (product) => {
-        setProduct((prevProducts) => [...prevProducts, product]);
-        setBasketCount((prevBasketCount) => prevBasketCount + 1);
-        console.log(product);
+    useEffect(() => {
+        localStorage.setItem('basketItems', JSON.stringify(basketItems));
+    }, [basketItems]);
+
+    const handleToBasketClick = (item) => {
+        setMyState((prevMyState) => prevMyState + 1);
+
+        // Hozzáadja az item-et a basketItems tömbhöz
+        setBasketItems((prevBasketItems) => [...prevBasketItems, item]);
     };
 
     return (
         <div className="App">
             <header className="App-header">
-                <Basket basketCount={basketCount} product={product} /> {/* Show Basket komponens */}
+                <Basket myState={myState} basketItems={basketItems} /> {/* Show Basket komponens */}
             </header>
             {children(handleToBasketClick)} {/* Átadjuk a children komponenseknek a handleToBasketClick callback-et */}
         </div>
