@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import States4 from "@/Pages/States4.jsx";
 
 export default function ProductsMy({ products3 }) {
+
     // Betöltjük a termékek állapotát a LocalStorage-ből az oldal betöltésekor
     const [products, setProducts] = useState(() => {
         const storedProducts = JSON.parse(localStorage.getItem('myProducts'));
