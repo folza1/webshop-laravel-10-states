@@ -3,12 +3,26 @@ import Button from "react-bootstrap/Button";
 import States4 from "@/Pages/States4.jsx";
 
 export default function ProductsMy({ products3 }) {
-
-    // Betöltjük a termékek állapotát a LocalStorage-ből az oldal betöltésekor
     const [products, setProducts] = useState(() => {
         const storedProducts = JSON.parse(localStorage.getItem('myProducts'));
         return storedProducts || products3;
     });
+
+    // Új állapot az aktuális termékek tárolásához, amelyet a gombnyomásra fogsz frissíteni
+    const [currentProducts, setCurrentProducts] = useState(products);
+
+    useEffect(() => {
+        // Frissítjük a LocalStorage-t, ha megváltozik a termékek állapota
+        localStorage.setItem("myProducts", JSON.stringify(currentProducts));
+    }, [currentProducts]);
+
+    // Függvény a termékek állapotának frissítésére gombnyomásra
+    const handleUpdateProducts = () => {
+        const storedProducts = JSON.parse(localStorage.getItem('myProducts'));
+        const updatedProducts = storedProducts || products3;
+        setCurrentProducts(updatedProducts);
+        setProducts(updatedProducts);
+    };
 
     useEffect(() => {
         // Frissítjük a LocalStorage-t, ha megváltozik a termékek állapota
@@ -38,6 +52,9 @@ export default function ProductsMy({ products3 }) {
                                 }}
                             >
                                 Add to Basket
+                            </Button>
+                            <Button onClick={handleUpdateProducts}>
+                                Update Products
                             </Button>
                         </div>
                     ))}
